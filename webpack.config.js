@@ -52,13 +52,13 @@ const config = {
             //     use: [stylesHandler, 'css-loader'],
             // },
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.scss$/,
                 use: [
-                    stylesHandler,
-                    "css-loader",
-                    "sass-loader",
-                  ],
-            },
+                  'style-loader',
+                  'css-loader',
+                  'sass-loader',
+                ],
+              },
             {
                 test: /\.(eot|ttf|woff|woff2)$/i,
                 type: 'asset',
