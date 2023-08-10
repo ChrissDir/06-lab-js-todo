@@ -54,6 +54,7 @@ const config = {
             {
                 test: /\.scss$/,
                 use: [
+                   stylesHandler,
                   'style-loader',
                   'css-loader',
                   'sass-loader',
