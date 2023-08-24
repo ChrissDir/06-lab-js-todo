@@ -47,19 +47,14 @@ const config = {
                 test: /\.(js|jsx)$/i,
                 loader: 'babel-loader',
             },
-            // {
-            //     test: /\.css$/i,
-            //     use: [stylesHandler, 'css-loader'],
-            // },
             {
-                test: /\.scss$/,
-                use: [
-                   stylesHandler,
-                  'style-loader',
-                  'css-loader',
-                  'sass-loader',
-                ],
-              },
+                test: /\.css$/i,
+                use: [stylesHandler,'css-loader'],
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [stylesHandler, 'css-loader', 'sass-loader'],
+            },
             {
                 test: /\.(eot|ttf|woff|woff2)$/i,
                 type: 'asset',

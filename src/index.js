@@ -1,6 +1,6 @@
 import "./style.scss";
 
-// Sélection des éléments du DOM
+/* // Sélection des éléments du DOM
 const taskInput = document.querySelector('#task-input');
 const taskList = document.querySelector('#task-list');
 const filterButtons = document.querySelectorAll('.filter-button');
@@ -106,4 +106,4 @@ taskList.addEventListener('change', () => {
     return taskText;
   });
   localStorage.setItem('tasks', JSON.stringify(tasks));
-});
+}); */
