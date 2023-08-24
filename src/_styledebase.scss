@@ -13,11 +13,61 @@ body {
 
 #container{
   width: 100%;
-  height: auto;
+  height: 100vh;
+  padding: 3.3125rem 3.875rem;
   background-color: $primary-color;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
 }
 
 h1{
   font-size: 6rem;
-  text-transform: capitalize;
+  text-transform: uppercase;
+  margin-bottom: 1.3125rem;
+}
+
+button{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+#darkmodbtn{
+  width: 60px;
+  height: 60px;
+  align-self: center;
+}
+
+#searchbar{
+  width: 100%;
+  border-radius: 45px;
+  font-size: 24px;
+  border: 1px solid $primary-color;
+  outline: none;
+  padding: 1.4375rem 3.0925rem;
+  background-color: $inputs-color;
+}
+#searchbar:focus{
+  border: 1px solid $secondary-color;
+}
+#grid{
+  display: grid;
+}
+#grid > *{
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+#grid > button:nth-child(2){
+  margin-right: 20px;
+  margin-left: calc(100% - 90px);
+  width: 60px;
+}
+
+#darkmodbtnimg:hover{
+  content: url(./assets/images/checkmark.svg);
 }
