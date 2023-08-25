@@ -7,13 +7,12 @@
 body {
   font-family: 'Inter';
   font-weight: 400;
-  background-size: cover;
   min-height: 100vh;
 }
 
 #container{
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   padding: 3.3125rem 3.875rem;
   background-color: $primary-color;
 }
@@ -21,12 +20,12 @@ body {
 header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1.3125rem;
 }
 
 h1{
   font-size: 6rem;
   text-transform: uppercase;
-  margin-bottom: 1.3125rem;
 }
 
 button{
@@ -44,30 +43,124 @@ button{
 
 #searchbar{
   width: 100%;
-  border-radius: 45px;
-  font-size: 24px;
-  border: 1px solid $primary-color;
+  border-radius: 2.8125rem;
+  font-size: 1.5rem;
+  border: .1875rem solid $primary-color;
   outline: none;
   padding: 1.4375rem 3.0925rem;
   background-color: $inputs-color;
 }
-#searchbar:focus{
-  border: 1px solid $secondary-color;
+#searchbar::placeholder{
+  color: $placeholder-color;
 }
+
+#searchbar:focus{
+  border: .1875rem solid $secondary-color;
+}
+
 #grid{
   display: grid;
 }
+
 #grid > *{
   grid-column-start: 1;
   grid-row-start: 1;
 }
 
 #grid > button:nth-child(2){
-  margin-right: 20px;
-  margin-left: calc(100% - 90px);
+  margin-right: 1.25rem;
+  margin-left: calc(100% - 5.625rem);
   width: 60px;
+}
+#darkmodbtnimg{
+  border: .3125rem solid $primary-color;
 }
 
 #darkmodbtnimg:hover{
+  border-radius: 2.8125rem;
+  border: .3125rem solid $secondary-color;
+}
+
+#loupe:hover{
   content: url(./assets/images/checkmark.svg);
+}
+
+form{
+  padding-bottom: 2rem;
+}
+
+#selection{
+  border-radius: 2.8125rem;
+  border: .125rem solid $secondary-color;
+  background: $inputs-color;
+  max-width: fit-content;
+  margin-bottom: 2.5rem;
+  min-width: 495px;
+}
+
+#btnAll, #btnToDo, #btnDoing, #btnDone{
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  height: 68px;
+  
+}
+
+#btnAll{
+  padding-right: 1.25rem;
+  padding-left: 2.1875rem;
+  border-right: .125rem solid $secondary-color;
+}
+
+#btnToDo, #btnDoing{
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  border-right: .125rem solid $secondary-color;
+}
+
+#btnDone{
+  padding-left: 1.25rem;
+  padding-right: 2.1875rem;
+}
+
+#btnAll:hover, #btnToDo:hover, #btnDoing:hover, #btnDone:hover{
+  color: #0093D2;
+}
+
+#app{
+  display: flex;
+  justify-content: space-between;
+}
+
+h2{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.625rem;
+}
+
+#todoTask, #DoingTask, #DoneTask{
+  width: 30%;
+  min-width: 285px;
+  min-height: 257px;
+  max-height: auto;
+  padding: 1rem 2.4375rem;
+}
+
+#todoTask{
+  background-color: $to-do-color;
+}
+
+#DoingTask{
+  background-color: $doing-color;
+}
+
+#DoneTask{
+  background-color: $done-color;
+}
+
+.task{
+  display: flex;
+  width: 100%;
+  height: 111px;
+  margin-bottom: 2.75rem;
+  background-color: $primary-color;
 }
