@@ -38,11 +38,20 @@
       <button id="btnDone">Done</button>
     </div>
     <div id="app">
-      <!-- <template id="task-template"> -->
         <div id="todoTask">
           <h2>TO-DO</h2>
+      <!-- <template id="task-template"> -->
           <div class="task">
-            
+            <div class="contenu">
+              <p class="nomDeTâche">Nom de la tâche</p>
+              <p class="date">Date</p>
+              <p class="description">Description</p>
+              <div class="actions">
+                <button class="terminer"><img src="./assets/images/checkmark.svg" alt="Green checkmark"></button>
+                <button class="modifier"><img src="./assets/images/pen.svg" alt="Black pen"></button>
+                <button class="supprimer"><img src="./assets/images/basket.svg" alt="Black trashcan"></button>
+              </div>
+            </div>
           </div>
       <!-- </template> -->
           <div class="task">
@@ -51,12 +60,24 @@
           <div class="task">
             
           </div>
+          <button class="addTask">add a new task +</button>
         </div>
         <div id="DoingTask">
           <h2>DOING</h2>
+          <div class="task">
+            
+          </div>
+          <div class="task">
+            
+          </div>
+          <button class="addTask">add a new task +</button>
         </div>
         <div id="DoneTask">
           <h2>DONE</h2>
+          <div class="task">
+            
+          </div>
+          <button class="addTask">add a new task +</button>
         </div>
     </div>
   </div>
