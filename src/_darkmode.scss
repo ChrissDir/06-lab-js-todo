@@ -1,0 +1,47 @@
+body.dark-theme {
+    color: $primary-color;
+}
+
+#container.dark-theme {
+    background-color: $darkmode-background-color;
+}
+
+#searchbar.dark-theme {
+    border: .1875rem solid $darkmode-background-color;
+    background-color: $darkmode-inputs;
+    color: $primary-color;
+}
+
+#loupe.dark-theme{
+    content: url(./assets/images/mg-darkmod.svg);
+}
+
+#searchbar.dark-theme::placeholder {
+    color: $placeholder-darkmod-color;
+}
+
+#searchbar.dark-theme:focus {
+    border: .1875rem solid $primary-color;
+}
+
+#selection.dark-theme{
+    background-color: $darkmode-inputs;
+    border-color: $primary-color;
+}
+
+button.dark-theme{
+    border-color: $primary-color !important;
+    color: $primary-color;
+}
+
+#todoTask.dark-theme{
+    background-color: $to-do-darkmod-color;
+}
+
+#DoingTask.dark-theme{
+    background-color: $doing-darkmod-color;
+}
+
+#DoneTask.dark-theme{
+    background-color: $done-darkmod-color;
+}

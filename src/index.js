@@ -1,11 +1,62 @@
 import "./style.scss";
 
+const toggleModeButton = document.querySelector('#darkmodbtn');
+const container = document.querySelector('#container');
+const searchBar = document.querySelector('#searchbar');
+const loupe = document.querySelector('#loupe');
+const selection = document.querySelector('#selection');
+const buttons = document.querySelectorAll('button');
+const toDo = document.querySelector('#todoTask');
+const doingTask = document.querySelector('#DoingTask');
+const doneTask = document.querySelector('#DoneTask');
+
+toggleModeButton.addEventListener('click', () => {
+  document.body.classList.toggle('dark-theme');
+  container.classList.toggle('dark-theme');
+  searchBar.classList.toggle('dark-theme');
+  loupe.classList.toggle('dark-theme');
+  selection.classList.toggle('dark-theme');
+  toDo.classList.toggle('dark-theme');
+  doingTask.classList.toggle('dark-theme');
+  doneTask.classList.toggle('dark-theme');
+  buttons.forEach(button => {
+    button.classList.toggle('dark-theme');
+  });
+});
+
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+if (prefersDarkScheme.matches) {
+  document.body.classList.add("dark-theme");
+  container.classList.add('dark-theme');
+  searchBar.classList.add('dark-theme');
+  loupe.classList.add('dark-theme');
+  selection.classList.add('dark-theme');
+  toDo.classList.add('dark-theme');
+  doingTask.classList.add('dark-theme');
+  doneTask.classList.add('dark-theme');
+  buttons.forEach(button => {
+    button.classList.add('dark-theme');
+  });
+} else {
+  document.body.classList.remove("dark-theme");
+  container.classList.remove('dark-theme');
+  searchBar.classList.remove('dark-theme');
+  loupe.classList.remove('dark-theme');
+  selection.classList.remove('dark-theme');
+  toDo.classList.remove('dark-theme');
+  doingTask.classList.remove('dark-theme');
+  doneTask.classList.remove('dark-theme');
+  buttons.forEach(button => {
+    button.classList.remove('dark-theme');
+  });
+}
+
 /* // Sélection des éléments du DOM
 const taskInput = document.querySelector('#task-input');
 const taskList = document.querySelector('#task-list');
 const filterButtons = document.querySelectorAll('.filter-button');
-const clearCompletedButton = document.querySelector('#clear-completed-button');
-const toggleModeButton = document.querySelector('#toggle-mode-button');
+const clearCompletedButton = document.querySelector('#supprimer');
 
 // Écouteur d'événement pour l'ajout d'une nouvelle tâche
 taskInput.addEventListener('submit', (e) => {
@@ -86,11 +137,6 @@ clearCompletedButton.addEventListener('click', () => {
   });
 });
 
-// Écouteur d'événement pour basculer entre les modes clair et sombre
-toggleModeButton.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-});
-
 // Récupération des tâches depuis le stockage local
 window.addEventListener('DOMContentLoaded', () => {
   const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -106,4 +152,4 @@ taskList.addEventListener('change', () => {
     return taskText;
   });
   localStorage.setItem('tasks', JSON.stringify(tasks));
-}); */
+});  */

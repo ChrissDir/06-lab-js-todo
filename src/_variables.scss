@@ -1,26 +1,15 @@
-@font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(./assets/fonts/Inter-400.woff2) format("woff2");
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(./assets/fonts/Inter-700.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
 $primary-color: #DBC7C7;
 $secondary-color: #000;
+$darkmode-background-color: #292929;
 $placeholder-color: #828282;
+$placeholder-darkmod-color: #8B8B8B;
 $inputs-color: #D9D9D9;
 $to-do-color: #F95454;
+$to-do-darkmod-color: #8A0000;;
 $doing-color: #F48637;
+$doing-darkmod-color: #AC4800;
 $done-color: #30B435;
+$done-darkmod-color: #008205;
+$darkmode-inputs: #636363;
 $font-family: 'Inter', sans-serif;
 $font-size: 100%;
