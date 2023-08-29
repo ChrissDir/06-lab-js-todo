@@ -1,55 +1,53 @@
 import "./style.scss";
 
 const toggleModeButton = document.querySelector('#darkmodbtn');
-const container = document.querySelector('#container');
-const searchBar = document.querySelector('#searchbar');
-const loupe = document.querySelector('#loupe');
-const selection = document.querySelector('#selection');
+const elements = [
+  document.body,
+  document.querySelector('#container'),
+  document.querySelector('#searchbar'),
+  document.querySelector('#loupe'),
+  document.querySelector('#selection'),
+  document.querySelector('#todoTask'),
+  document.querySelector('#DoingTask'),
+  document.querySelector('#DoneTask')
+];
+const contenu = document.querySelectorAll('.contenu');
 const buttons = document.querySelectorAll('button');
-const toDo = document.querySelector('#todoTask');
-const doingTask = document.querySelector('#DoingTask');
-const doneTask = document.querySelector('#DoneTask');
 
 toggleModeButton.addEventListener('click', () => {
-  document.body.classList.toggle('dark-theme');
-  container.classList.toggle('dark-theme');
-  searchBar.classList.toggle('dark-theme');
-  loupe.classList.toggle('dark-theme');
-  selection.classList.toggle('dark-theme');
-  toDo.classList.toggle('dark-theme');
-  doingTask.classList.toggle('dark-theme');
-  doneTask.classList.toggle('dark-theme');
+  elements.forEach(element => {
+    element.classList.toggle('dark-theme');
+  });
   buttons.forEach(button => {
     button.classList.toggle('dark-theme');
   });
+  contenu.forEach(cont => {
+    cont.classList.toggle('dark-theme');
+  })
 });
 
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
 if (prefersDarkScheme.matches) {
-  document.body.classList.add("dark-theme");
-  container.classList.add('dark-theme');
-  searchBar.classList.add('dark-theme');
-  loupe.classList.add('dark-theme');
-  selection.classList.add('dark-theme');
-  toDo.classList.add('dark-theme');
-  doingTask.classList.add('dark-theme');
-  doneTask.classList.add('dark-theme');
+  elements.forEach(element => {
+    element.classList.add('dark-theme');
+  });
   buttons.forEach(button => {
     button.classList.add('dark-theme');
   });
+  contenu.forEach(cont => {
+    cont.classList.add('dark-theme');
+  })
 } else {
-  document.body.classList.remove("dark-theme");
-  container.classList.remove('dark-theme');
-  searchBar.classList.remove('dark-theme');
-  loupe.classList.remove('dark-theme');
-  selection.classList.remove('dark-theme');
-  toDo.classList.remove('dark-theme');
-  doingTask.classList.remove('dark-theme');
-  doneTask.classList.remove('dark-theme');
+  elements.forEach(element => {
+    element.classList.remove('dark-theme');
+  });
   buttons.forEach(button => {
     button.classList.remove('dark-theme');
   });
+  contenu.forEach(cont => {
+    cont.classList.remove('dark-theme');
+  })
 }
 
 /* // Sélection des éléments du DOM
