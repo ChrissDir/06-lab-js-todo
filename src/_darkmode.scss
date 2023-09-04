@@ -24,11 +24,6 @@ body.dark-theme {
     border: .1875rem solid $primary-color;
 }
 
-#selection.dark-theme{
-    background-color: $darkmode-inputs;
-    border-color: $primary-color;
-}
-
 button.dark-theme{
     border-color: $primary-color !important;
     color: $primary-color;
@@ -46,6 +41,18 @@ button.dark-theme{
     background-color: $done-darkmod-color;
 }
 
-.contenu.dark-theme{
+.nomDeTâche.dark-theme{
     color: $secondary-color;
+}
+
+.date.dark-theme{
+    color: $secondary-color;
+}
+
+.description.dark-theme{
+    color: $secondary-color;
+}
+
+#modal-container.dark-theme{
+    background-color: $to-do-darkmod-color;
 }

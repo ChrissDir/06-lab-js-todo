@@ -7,7 +7,6 @@
 body {
   font-family: 'Inter';
   font-weight: 400;
-  min-height: 100vh;
 }
 
 #container {
@@ -75,60 +74,16 @@ button {
 }
 
 #darkmodbtnimg {
-  border: .3125rem solid transparent;
+  border: .125rem solid transparent;
 }
 
 #darkmodbtnimg:hover {
   border-radius: 2.8125rem;
-  border: .3125rem solid $secondary-color;
+  border: .125rem solid $secondary-color;
 }
 
 form {
   padding-bottom: 2rem;
-}
-
-#selection {
-  border-radius: 2.8125rem;
-  border: .125rem solid $secondary-color;
-  background: $inputs-color;
-  max-width: fit-content;
-  margin-bottom: 2.5rem;
-  min-width: 495px;
-}
-
-#btnAll,
-#btnToDo,
-#btnDoing,
-#btnDone {
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  height: 68px;
-}
-
-#btnAll {
-  padding-right: 1.25rem;
-  padding-left: 2.1875rem;
-  border-right: .125rem solid $secondary-color;
-}
-
-#btnToDo,
-#btnDoing {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  border-right: .125rem solid $secondary-color;
-}
-
-#btnDone {
-  padding-left: 1.25rem;
-  padding-right: 2.1875rem;
-}
-
-#btnAll:hover,
-#btnToDo:hover,
-#btnDoing:hover,
-#btnDone:hover {
-  color: #0093D2;
-  transition: 0.3s ease-in-out;
 }
 
 #app {
@@ -147,7 +102,6 @@ h2 {
 #DoneTask {
   width: 30%;
   min-width: 285px;
-  min-height: 257px;
   height: fit-content;
   padding: 1rem 2.4375rem;
   border-radius: 50px;
@@ -184,6 +138,10 @@ h2 {
   background-color: $primary-color;
 }
 
+.task:hover{
+  cursor: grab;
+}
+
 .addTask {
   display: flex;
   margin: auto;
@@ -192,14 +150,14 @@ h2 {
 }
 
 .addTask:hover{
-  color: #0093D2;
+  color: $hover-color;
   transition: 0.3s ease-in-out;
 }
 
 .contenu {
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr 90px;
+  grid-template-columns: 1fr 100px;
   column-gap: 20px;
   row-gap: 11px;
   padding: .3125rem;
@@ -209,7 +167,7 @@ h2 {
   display: flex;
   align-items: center;
   height: auto;
-  border-bottom: 1px solid $secondary-color;
+  border-bottom: .0625rem solid $secondary-color;
 }
 
 .description{
@@ -223,25 +181,103 @@ h2 {
   justify-content: space-between;
 }
 
+#modal{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0 , 0.8);
+}
+
+#fermer{
+  display: flex;
+  justify-content: right;
+}
+
+#btnfermer{
+  font-size: 1.875rem;
+  margin-bottom: 5%;
+  color: $primary-color;
+}
+
+#modal{
+  display: none;
+}
+
+#modal-container{
+  background-color: $to-do-color;
+  padding: .625rem 2.1875rem 2.1875rem 2.1875rem;
+  width: 50%;
+}
+
+.inputmodal{
+  display: flex;
+  margin-bottom: 1.5625rem;
+  justify-content: space-between;
+}
+
+.inputmodal:last-child{
+  margin-bottom: 0;
+}
+
+#descrimodal, #nameTask{
+  width: 100%;
+  padding: 1.1875rem 1.625rem;
+  font-size: 1.25rem;
+  outline: none;
+}
+
+#datemodal{
+  width: auto;
+  padding: 1.1875rem 1.625rem;
+  font-size: 1.25rem;
+  outline: none;
+}
+
+#formmodal{
+  padding: 0;
+}
+
+#btnmodal{
+  padding: 1px 3rem;
+  font-size: 1.25rem;
+  border: .125rem solid $secondary-color;
+  border-radius: 1.875rem;
+}
+
 @media screen and (max-width: 1038px){
   #container{
-    padding: 26px 2.25rem
+    padding: 1.625rem 2.25rem;
   }
-  #selection{
-    min-width: 0;
+  #modal-container{
+    width: 90%;
   }
 }
 
 @media screen and (max-width: 929px){
-
   h1{
-    font-size: 48px;
+    font-size: 3rem;
   }
-
+  #todoTask, #DoingTask{
+    margin-bottom: 1.875rem;
+  }
+  #todoTask, #DoingTask, #DoneTask{
+    width: 100%;
+  }
   #app{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+  #modal{
+    width: 100%;
+  }
+  #datemodal{
+    width: auto;
   }
 }
 
@@ -251,22 +287,11 @@ h2 {
     height: 50px;
   }
   #grid > button:nth-child(2){
-    margin-left: calc(100% - 70px);
+    margin-left: calc(100% - 3.75rem);
   }
   #searchbar{
     padding: .5625rem 1.5rem;
-    font-size: 14px;
-  }
-  #btnAll,
-  #btnToDo,
-  #btnDoing,
-  #btnDone {
-  font-size: .5rem;
-  height: 26px;
-}
-  #selection{
-    margin-left: auto;
-    margin-right: auto;
+    font-size: .875rem;
   }
   #loupe{
     width: 18px;
@@ -275,16 +300,51 @@ h2 {
   #searchbar::placeholder{
     font-size: .875rem;
   }
+
+  #descrimodal, #nameTask{
+    padding: .625rem 15px;
+    font-size: .75rem;
+  }
+  
+  #datemodal{
+    padding: .625rem 15px;
+    font-size: .75rem;
+  }
+
+  #btnmodal{
+    padding: .0625rem .4375rem;
+    font-size: .75rem;
+    border: .125rem solid $secondary-color;
+    border-radius: 1.875rem;
+  }
+
+  #btnfermer{
+    font-size: 20px;
+  }
 }
 
 @media screen and (max-width: 513px){
   h1{
     display: flex;
     align-items: center;
-    font-size: 30px;
+    font-size: 1.875rem;
+  }
+  h2{
+    margin-bottom: 1.25rem;
+  }
+  .nomDeTâche, .date, .description {
+    font-size: .75rem;
   }
   #darkmodbtnimg{
     width: 40px;
     height: 40px;
+  }
+  .task{
+    min-height: 80px;
+    margin-bottom: 1.25rem;
+  }
+  .checkmark, .pen, .can{
+    width: 16px;
+    height: 20px;
   }
 }

@@ -22,44 +22,46 @@
         <button type="submit"><img id="loupe" src="./assets/images/mg.svg" alt="magnifying glass"></button>
       </div>
     </form>
-    <div id="selection">
-      <button id="btnAll">All</button>
-      <button id="btnToDo">To-Do</button>
-      <button id="btnDoing">Doing</button>
-      <button id="btnDone">Done</button>
+    <div id="modal">
+      <div id="modal-container">
+        <div id="fermer">
+          <button id="btnfermer">x</button>
+          </div>
+        <form id="formmodal" action="#" method="POST">
+          <div class="inputmodal">
+          <input type="text" name="nameTask" id="nameTask" placeholder="Name of the task">
+          </div>
+          <div class="inputmodal">
+          <textarea name="descriptionmodal" id="descrimodal" placeholder="Description"></textarea>
+          </div>
+          <div class="inputmodal">
+          <input type="date" name="datemodal" id="datemodal">
+          <button id="btnmodal" type="submit">Add the task</button>
+          </div>
+        </form>
+      </div>
     </div>
     <div id="app">
       <div id="todoTask">
         <h2>TO-DO</h2>
-        <div class="task">
+       <template class="newTaskTemplate">
+          <div class="task">
           <div class="contenu">
-            <p class="nomDeTâche">Manger chez Bertrand</p>
+            <p class="nomDeTâche">iiiiiiiiiiiiii</p>
             <p class="date">20/06/1998</p>
-            <p class="description">Je dois aller manger un barbecue chez Bertrand à cette date</p>
+            <p class="description">iiiiiiiiiiiiiiiiiiiiiii</p>
             <div class="actions">
-              <button class="terminer"><img src="./assets/images/checkmark.svg" alt="Green checkmark"></button>
-              <button class="modifier"><img src="./assets/images/pen.svg" alt="Black pen"></button>
-              <button class="supprimer"><img src="./assets/images/basket.svg" alt="Black trashcan"></button>
+              <button class="terminer"><img class="checkmark" src="./assets/images/checkmark.svg" alt="Green checkmark"></button>
+              <button class="modifier"><img class="pen" src="./assets/images/pen.svg" alt="Black pen"></button>
+              <button class="supprimer"><img class="can" src="./assets/images/basket.svg" alt="Black trashcan"></button>
             </div>
           </div>
         </div>
-
-        <div class="task">
-
-        </div>
-        <div class="task">
-
-        </div>
+      </template>
         <button class="addTask">add a new task +</button>
       </div>
       <div id="DoingTask">
         <h2>DOING</h2>
-        <div class="task">
-
-        </div>
-        <div class="task">
-
-        </div>
         <button class="addTask">add a new task +</button>
       </div>
       <div id="DoneTask">
@@ -67,8 +69,6 @@
           <h2>DONE</h2>
           <button><img id="deleteAll" src="./assets/images/basket-all.svg"
               alt="trashcan with a cross to delete every task done"></button>
-        </div>
-        <div class="task">
         </div>
         <button class="addTask">add a new task +</button>
       </div>
