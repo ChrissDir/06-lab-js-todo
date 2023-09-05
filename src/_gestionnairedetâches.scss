@@ -1,0 +1,168 @@
+#todoTask,
+#DoingTask,
+#DoneTask {
+  width: 30%;
+  min-width: 285px;
+  height: fit-content;
+  padding: 1rem 2.4375rem;
+  border-radius: 50px;
+}
+
+form {
+  padding-bottom: 2rem;
+}
+
+#app {
+  display: flex;
+  justify-content: space-between;
+}
+
+#todoTask {
+  background-color: $to-do-color;
+}
+
+#DoingTask {
+  background-color: $doing-color;
+}
+
+#DoneTask {
+  background-color: $done-color;
+}
+
+#donePlacement{
+  display: flex;
+  justify-content: space-between;
+  padding-left: calc(45% - 20px);
+}
+
+#deleteAll{
+  margin-bottom: 41px;
+}
+
+.task {
+  display: flex;
+  width: 100%;
+  min-height: 111px;
+  height: auto;
+  margin-bottom: 2.75rem;
+  background-color: $primary-color;
+}
+
+.task:hover{
+  cursor: grab;
+}
+
+.addTask {
+  display: flex;
+  margin: auto;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+}
+
+.addTask:hover{
+  color: $hover-color;
+  transition: 0.3s ease-in-out;
+}
+
+.contenu {
+  display: grid;
+  min-width: 100%;
+  max-width: 100%;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 11px;
+  padding: .3125rem;
+}
+
+.nomDeTâche, .date{
+  display: flex;
+  align-items: center;
+  height: auto;
+  word-wrap: break-word;
+  border-bottom: .0625rem solid $secondary-color;
+}
+
+.nomDeTâche{
+  max-width: 150px;
+}
+
+.description{
+  word-wrap: break-word;
+  max-width: 190px;
+  height: auto;
+}
+
+.actions {
+  display: flex;
+  align-items: end;
+  margin-right: .3125rem;
+  justify-content: space-between;
+}
+
+#modal{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0 , 0.8);
+}
+
+#fermer{
+  display: flex;
+  justify-content: right;
+}
+
+#btnfermer{
+  font-size: 1.875rem;
+  margin-bottom: 5%;
+  color: $primary-color;
+}
+
+#modal{
+  display: none;
+}
+
+#modal-container{
+  background-color: $to-do-color;
+  padding: .625rem 2.1875rem 2.1875rem 2.1875rem;
+  width: 50%;
+}
+
+.inputmodal{
+  display: flex;
+  margin-bottom: 1.5625rem;
+  justify-content: space-between;
+}
+
+.inputmodal:last-child{
+  margin-bottom: 0;
+}
+
+#descrimodal, #nameTask{
+  width: 100%;
+  padding: 1.1875rem 1.625rem;
+  font-size: 1.25rem;
+  outline: none;
+}
+
+#datemodal{
+  width: auto;
+  padding: 1.1875rem 1.625rem;
+  font-size: 1.25rem;
+  outline: none;
+}
+
+#formmodal{
+  padding: 0;
+}
+
+#btnmodal{
+  padding: 1px 3rem;
+  font-size: 1.25rem;
+  border: .125rem solid $secondary-color;
+  border-radius: 1.875rem;
+}
