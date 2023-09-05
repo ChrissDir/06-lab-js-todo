@@ -78,13 +78,11 @@ form {
   display: flex;
   align-items: center;
   height: auto;
+  max-width: 250px;
   word-wrap: break-word;
   border-bottom: .0625rem solid $secondary-color;
 }
 
-.nomDeTâche{
-  max-width: 150px;
-}
 
 .description{
   word-wrap: break-word;
@@ -165,4 +163,8 @@ form {
   font-size: 1.25rem;
   border: .125rem solid $secondary-color;
   border-radius: 1.875rem;
+}
+
+.dragging:focus{
+  cursor: grabbing;
 }
