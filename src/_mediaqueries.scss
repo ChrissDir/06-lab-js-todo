@@ -28,6 +28,13 @@
     #datemodal{
       width: auto;
     }
+    .date{
+      max-width: 20%;
+    }
+
+    .actions{
+      width: 20%;
+    }
   }
   
   @media screen and (max-width: 557px){
@@ -80,10 +87,21 @@
       font-size: 1.875rem;
     }
     h2{
+      font-size: 20px;
       margin-bottom: 1.25rem;
+    }
+    .addTask{
+      font-size: 16px;
+    }
+    #donePlacement{
+      padding-left: calc(45% - 12px);
     }
     .nomDeTâche, .date, .description {
       font-size: .75rem;
+    }
+    #deleteAll{
+      width: 20px;
+      height: 20px;
     }
     #darkmodbtnimg{
       width: 40px;

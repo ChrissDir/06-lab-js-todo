@@ -26,17 +26,17 @@
       <div id="modal-container">
         <div id="fermer">
           <button id="btnfermer">x</button>
-          </div>
+        </div>
         <form id="formmodal" action="#" method="POST">
           <div class="inputmodal">
-          <input type="text" name="nameTask" id="nameTask" placeholder="Name of the task">
+            <input type="text" name="nameTask" id="nameTask" placeholder="Name of the task">
           </div>
           <div class="inputmodal">
-          <textarea name="descriptionmodal" id="descrimodal" placeholder="Description"></textarea>
+            <textarea name="descriptionmodal" id="descrimodal" placeholder="Description"></textarea>
           </div>
           <div class="inputmodal">
-          <input type="date" name="datemodal" id="datemodal">
-          <button id="btnmodal" type="submit">Add the task</button>
+            <input type="date" name="datemodal" id="datemodal">
+            <button id="btnmodal" type="submit">Add the task</button>
           </div>
         </form>
       </div>
@@ -44,20 +44,24 @@
     <div id="app">
       <div id="todoTask">
         <h2>TO-DO</h2>
-       <template class="newTaskTemplate">
+        <template class="newTaskTemplate">
           <div class="task">
-          <div class="contenu">
-            <p class="nomDeTâche">iiiiiiiiiiiiii</p>
-            <p class="date">20/06/1998</p>
-            <p class="description">iiiiiiiiiiiiiiiiiiiiiii</p>
-            <div class="actions">
-              <button><img class="checkmark" src="./assets/images/checkmark.svg" alt="Green checkmark"></button>
-              <button><img class="pen" src="./assets/images/pen.svg" alt="Black pen"></button>
-              <button><img class="can" src="./assets/images/basket.svg" alt="Black trashcan"></button>
+            <div class="contenu">
+              <div class="haut">
+                <p class="nomDeTâche">iiiiiiiiiiiiii</p>
+                <p class="date">20/06/1998</p>
+              </div>
+              <div class="bas">
+                <p class="description">iiiiiiiiiiiiiiiiiiiiiii</p>
+                <div class="actions">
+                  <button><img class="checkmark" src="./assets/images/checkmark.svg" alt="Green checkmark"></button>
+                  <button><img class="pen" src="./assets/images/pen.svg" alt="Black pen"></button>
+                  <button><img class="can" src="./assets/images/basket.svg" alt="Black trashcan"></button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </template>
+        </template>
         <button class="addTask">add a new task +</button>
       </div>
       <div id="DoingTask">

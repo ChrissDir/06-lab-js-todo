@@ -55,6 +55,7 @@ form {
 .addTask {
   display: flex;
   margin: auto;
+  margin-bottom: 10px;
   text-transform: uppercase;
   font-size: 1.25rem;
 }
@@ -65,28 +66,49 @@ form {
 }
 
 .contenu {
-  display: grid;
-  min-width: 100%;
-  max-width: 100%;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 20px;
-  row-gap: 11px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
   padding: .3125rem;
 }
 
 .nomDeTâche, .date{
   display: flex;
   align-items: center;
+  word-break: break-word;
+  width: auto;
   height: auto;
-  max-width: 250px;
-  word-wrap: break-word;
   border-bottom: .0625rem solid $secondary-color;
+  padding-bottom: 1%;
 }
 
+.nomDeTâche{
+  max-width: 55%;
+}
+
+.date{
+  max-width: 35%;
+}
+
+.haut{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2%;
+}
+
+.bas{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 .description{
-  word-wrap: break-word;
-  max-width: 190px;
+  display: flex;
+  word-break: break-word;
+  width: auto;
+  max-width: 55%;
   height: auto;
 }
 
@@ -95,6 +117,7 @@ form {
   align-items: end;
   margin-right: .3125rem;
   justify-content: space-between;
+  width: 25%;
 }
 
 #modal{
