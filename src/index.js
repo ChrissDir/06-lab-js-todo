@@ -48,9 +48,9 @@ deleteAllButton.addEventListener("click", function () {
     taskDiv.remove();
   });
 });
-// 
+
 document.addEventListener('click', function (event) {
-  if (event.target.classList.contains('can')) {
+  if (event.target.classList.contains('checkmark')) {
     const taskElement = event.target.closest('.task');
     if (taskElement && taskElement instanceof Node) {
       const doneTaskDiv = document.getElementById('DoneTask');
@@ -59,7 +59,14 @@ document.addEventListener('click', function (event) {
       checkmarkButton.remove();
     }
   }
-// Pour le bouton modifier
+
+  if (event.target.classList.contains('can')) {
+    const taskElement = event.target.closest('.task');
+    if (taskElement && taskElement instanceof Node) {
+      taskElement.remove();
+    }
+  }
+
   if (event.target.classList.contains('pen')) {
     const taskElement = event.target.closest('.task');
     const nameTask = taskElement.querySelector('.nomDeTâche').textContent;
@@ -76,7 +83,6 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// Pour le bouton ajouter une tâche et pour déplacer la tâche vers DoneTask
 const addTaskButtons = document.querySelectorAll('.addTask');
 addTaskButtons.forEach(function (button) {
   button.addEventListener('click', function (event) {
@@ -92,21 +98,18 @@ addTaskButtons.forEach(function (button) {
   });
 });
 
-// Fonction lors du click submit du modal pour la création de la nouvelle tâche
 btnmodal.addEventListener("click", function (e) {
   e.preventDefault();
   const nameTask = document.getElementById('nameTask').value;
   const description = document.getElementById('descrimodal').value;
   const date = document.getElementById('datemodal').value;
 
-// Se passe si on modifie l'élément, récupère les values existantes
   if (editingTaskElement) {
     editingTaskElement.querySelector('.nomDeTâche').textContent = nameTask;
     editingTaskElement.querySelector('.description').textContent = description;
     editingTaskElement.querySelector('.date').textContent = date;
     editingTaskElement = null;
   } else {
-// Crée la task avec le template et lui applique le dark-mode s'il est actif
     const template = document.querySelector('.newTaskTemplate');
     const newTask = template.content.cloneNode(true);
     const taskElements = newTask.querySelectorAll('*');
@@ -124,6 +127,7 @@ btnmodal.addEventListener("click", function (e) {
   document.getElementById('datemodal').value = '';
   modal.style.display = 'none';
 });
+
 
 
 
