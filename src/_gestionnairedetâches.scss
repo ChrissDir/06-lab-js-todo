@@ -86,6 +86,7 @@ form {
 }
 
 .date{
+  width: fit-content;
   max-width: 40%;
 }
 
@@ -115,6 +116,7 @@ form {
   align-items: end;
   margin-right: .3125rem;
   justify-content: space-between;
+  max-width: 80px;
   width: 35%;
 }
 

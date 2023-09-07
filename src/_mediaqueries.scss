@@ -29,7 +29,7 @@
       width: auto;
     }
     .date{
-      max-width: 20%;
+      max-width: 30%;
     }
 
     #donePlacement{
@@ -81,6 +81,12 @@
   
     #btnfermer{
       font-size: 20px;
+    }
+
+    #todoTask,
+    #DoingTask,
+    #DoneTask{
+      min-height: 104px;
     }
   }
   

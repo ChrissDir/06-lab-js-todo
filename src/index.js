@@ -75,9 +75,13 @@ document.addEventListener('click', function (event) {
     const nameTaskInput = document.getElementById('nameTask');
     const descriptionInput = document.getElementById('descrimodal');
     const dateInput = document.getElementById('datemodal');
+    const btnModal = document.getElementById('btnmodal');
+    
     nameTaskInput.value = nameTask;
     descriptionInput.value = description;
     dateInput.value = date;
+    btnModal.textContent = 'Modify';
+    
     modal.style.display = 'flex';
     editingTaskElement = taskElement;
   }
@@ -94,6 +98,9 @@ addTaskButtons.forEach(function (button) {
       checkmarkButtons.forEach(function (button) {
         button.style.display = 'none';
       });
+    } else {
+      const btnModal = document.getElementById('btnmodal');
+      btnModal.textContent = 'Add a task';
     }
   });
 });
@@ -115,6 +122,11 @@ btnmodal.addEventListener("click", function (e) {
     newTask.querySelector('.nomDeTâche').textContent = nameTask;
     newTask.querySelector('.date').textContent = date;
     newTask.querySelector('.description').textContent = description;
+    if (document.body.classList.contains('dark-theme')){
+      newTask.querySelector('.nomDeTâche').classList.add('dark-theme');
+      newTask.querySelector('.date').classList.add('dark-theme');
+      newTask.querySelector('.description').classList.add('dark-theme');
+    };
     const parentElement = document.getElementById(parentElementId);
     newTask.querySelector('.task').setAttribute('id', 'task' + Date.now());
     parentElement.appendChild(newTask);
@@ -157,21 +169,87 @@ zoneDone.addEventListener('dragover', function (event) {
 zoneTask.addEventListener('drop', function (event) {
   event.preventDefault();
   const data = event.dataTransfer.getData("text");
-  console.log(data);
-  event.target.appendChild(document.getElementById(data));
+  if (event.target.id === 'todoTask') {
+    event.target.appendChild(document.getElementById(data));
+  }
 });
 
 zoneDoing.addEventListener('drop', function (event) {
   event.preventDefault();
   const data = event.dataTransfer.getData("text");
-  console.log(data);
-  event.target.appendChild(document.getElementById(data));
+  if (event.target.id === 'DoingTask') {
+    event.target.appendChild(document.getElementById(data));
+  }
 });
 
 zoneDone.addEventListener('drop', function (event) {
   event.preventDefault();
   const data = event.dataTransfer.getData("text");
-  console.log(data);
-  event.target.appendChild(document.getElementById(data));
+  if (event.target.id === 'DoneTask') {
+    event.target.appendChild(document.getElementById(data));
+  }
 });
 
+// Fonction pour chercher une tâche dans la searchbar
+
+const searchbar = document.getElementById('searchbar');
+const tasks = document.querySelectorAll('.task');
+
+searchbar.addEventListener('input', function(event) {
+  const searchText = event.target.value.toLowerCase();
+
+  tasks.forEach(function(task) {
+    const taskName = task.querySelector('.nomDeTâche').textContent.toLowerCase();
+    const taskDescription = task.querySelector('.description').textContent.toLowerCase();
+
+    if (taskName.includes(searchText) || taskDescription.includes(searchText)) {
+      task.style.display = 'block';
+    } else {
+      task.style.display = 'none';
+    }
+  });
+});
+
+// Fonction pour le local storage
+
+// Pour sauvegarder les données dans le localStorage
+function saveDataToLocalStorage() {
+  const tasks = document.querySelectorAll('.task');
+  const taskData = [];
+
+  tasks.forEach(function(task) {
+    const name = task.querySelector('.nomDeTâche').textContent;
+    const description = task.querySelector('.description').textContent;
+    const date = task.querySelector('.date').textContent;
+
+    taskData.push({ name, description, date });
+  });
+
+  localStorage.setItem('tasks', JSON.stringify(taskData));
+}
+
+// Pour charger les données depuis le localStorage
+function loadDataFromLocalStorage() {
+  const storedData = localStorage.getItem('tasks');
+
+  if (storedData) {
+    const taskData = JSON.parse(storedData);
+
+    taskData.forEach(function(data) {
+      const template = document.querySelector('.newTaskTemplate');
+      const newTask = template.content.cloneNode(true);
+      newTask.querySelector('.nomDeTâche').textContent = data.name;
+      newTask.querySelector('.date').textContent = data.date;
+      newTask.querySelector('.description').textContent = data.description;
+
+      const parentElement = document.getElementById('todoTask');
+      parentElement.appendChild(newTask);
+    });
+
+    taskElements = document.querySelectorAll('.task');
+  }
+}
+
+// Appeler les fonctions pour sauvegarder et charger les données
+saveDataToLocalStorage();
+loadDataFromLocalStorage();
