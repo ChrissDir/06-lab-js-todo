@@ -112,27 +112,66 @@ btnmodal.addEventListener("click", function (e) {
   } else {
     const template = document.querySelector('.newTaskTemplate');
     const newTask = template.content.cloneNode(true);
-    const taskElements = newTask.querySelectorAll('*');
-    taskElements.forEach(function (element) {
-      element.classList.add("dark-theme");
-    });
     newTask.querySelector('.nomDeTâche').textContent = nameTask;
     newTask.querySelector('.date').textContent = date;
     newTask.querySelector('.description').textContent = description;
     const parentElement = document.getElementById(parentElementId);
+    newTask.querySelector('.task').setAttribute('id', 'task' + Date.now());
     parentElement.appendChild(newTask);
+    taskElements = document.querySelectorAll('.task');
   }
   document.getElementById('nameTask').value = '';
   document.getElementById('descrimodal').value = '';
   document.getElementById('datemodal').value = '';
   modal.style.display = 'none';
+  
+  // Mise à jour des évènements
+  setupDragAndDrop();
 });
 
+let taskElements = document.querySelectorAll('.task');
 
+function setupDragAndDrop() {
+  taskElements.forEach(function (taskElement) {
+    taskElement.addEventListener('dragstart', function (event) {
+      event.dataTransfer.setData('text', taskElement.id);
+    });
+  });
+}
 
+const zoneTask = document.querySelector('#todoTask');
+zoneTask.addEventListener('dragover', function (event) {
+  event.preventDefault();
+});
 
+const zoneDoing = document.querySelector('#DoingTask');
+zoneDoing.addEventListener('dragover', function (event) {
+  event.preventDefault();
+});
 
+const zoneDone = document.querySelector('#DoneTask');
+zoneDone.addEventListener('dragover', function (event) {
+  event.preventDefault();
+});
 
+zoneTask.addEventListener('drop', function (event) {
+  event.preventDefault();
+  const data = event.dataTransfer.getData("text");
+  console.log(data);
+  event.target.appendChild(document.getElementById(data));
+});
 
+zoneDoing.addEventListener('drop', function (event) {
+  event.preventDefault();
+  const data = event.dataTransfer.getData("text");
+  console.log(data);
+  event.target.appendChild(document.getElementById(data));
+});
 
+zoneDone.addEventListener('drop', function (event) {
+  event.preventDefault();
+  const data = event.dataTransfer.getData("text");
+  console.log(data);
+  event.target.appendChild(document.getElementById(data));
+});
 
