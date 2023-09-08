@@ -60,6 +60,7 @@ button {
 
 #grid {
   display: grid;
+  padding-bottom: 2rem;
 }
 
 #grid>* {
@@ -85,7 +86,7 @@ button {
 h2 {
   display: flex;
   justify-content: center;
-  margin-bottom: 2.625rem;
+  margin-bottom: 30px;
 }
 
 #donePlacement > h2 {

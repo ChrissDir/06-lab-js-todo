@@ -8,22 +8,15 @@ const deleteAllButton = document.querySelector("#deleteAll");
 let parentElementId;
 let editingTaskElement = null;
 
-// Toggle permettant d'activer ou non le Dark-Mode en cliquant sur l'image et en appliquant la classe dark-theme à tous les éléments de la page
-
+// Ajouter un écouteur sur le bouton en toggle
 toggleModeButton.addEventListener('click', toggleDarkMode);
 
+// Fonction pour basculer entre les modes  
 function toggleDarkMode() {
   const elements = document.querySelectorAll("*");
   elements.forEach(function (element) {
     element.classList.toggle("dark-theme");
   });
-
-  const newTaskElements = document.querySelectorAll('.newTaskTemplate *');
-  newTaskElements.forEach(function (element) {
-    element.classList.toggle("dark-theme");
-  });
-
-  // Ajout de l'état du dark mode dans le localStorage
 
   if (document.body.classList.contains('dark-theme')) {
     localStorage.setItem('dark-theme', 'true');
@@ -32,10 +25,23 @@ function toggleDarkMode() {
   }
 }
 
-// Fonction permettant de faire en sorte que la première fois ou l'on visite le site, le dark-theme s'active tout seul ou non en fonction du theme de l'utilisateur et par la suite se rappeler du choix de l'utilisateur au niveau du dark-theme
+// Vérifier la préférence de l'utilisateur
+const isDarkSchemePreferred = prefersDarkScheme.matches;
+
+// Vérifier si un choix existe déja
+let isDarkThemeSet = localStorage.getItem('dark-theme');
+
+// Appliquer le mode sombre par défaut si préféré et non encore défini
+if (!isDarkThemeSet && isDarkSchemePreferred) {
+  localStorage.setItem('dark-theme', 'true');
+  document.body.classList.add('dark-theme');
+} else if (!isDarkThemeSet) {
+  localStorage.setItem('dark-theme', 'false');
+} else if (isDarkThemeSet === 'true') {
+  document.body.classList.add('dark-theme');
+}
 
 function addDarkModeByDefault() {
-
   // Vérifier la valeur du localStorage
   const isDarkTheme = localStorage.getItem('dark-theme');
 
@@ -107,12 +113,12 @@ document.addEventListener('click', function (event) {
     const descriptionInput = document.getElementById('descrimodal');
     const dateInput = document.getElementById('datemodal');
     const btnModal = document.getElementById('btnmodal');
-    
+
     nameTaskInput.value = nameTask;
     descriptionInput.value = description;
     dateInput.value = date;
     btnModal.textContent = 'Modify';
-    
+
     modal.style.display = 'flex';
     editingTaskElement = taskElement;
   }
@@ -125,8 +131,8 @@ addTaskButtons.forEach(function (button) {
   button.addEventListener('click', function (event) {
     parentElementId = event.target.parentNode.id;
     modal.style.display = 'flex';
-      const btnModal = document.getElementById('btnmodal');
-      btnModal.textContent = 'Add a task';
+    const btnModal = document.getElementById('btnmodal');
+    btnModal.textContent = 'Add a task';
   });
 });
 
@@ -148,7 +154,7 @@ btnmodal.addEventListener("click", function (e) {
     saveTasksToLocalStorage();
   } else {
 
-  // Créer une nouvelle tâche à partir du template
+    // Créer une nouvelle tâche à partir du template
 
     const template = document.querySelector('.newTaskTemplate');
     const newTask = template.content.cloneNode(true);
@@ -156,9 +162,9 @@ btnmodal.addEventListener("click", function (e) {
     newTask.querySelector('.date').textContent = date;
     newTask.querySelector('.description').textContent = description;
 
-  // Lui ajouter une classe dark-theme à ses éléments si le body contient cette classe
+    // Lui ajouter une classe dark-theme à ses éléments si le body contient cette classe
 
-    if (document.body.classList.contains('dark-theme')){
+    if (document.body.classList.contains('dark-theme')) {
       newTask.querySelector('.nomDeTâche').classList.add('dark-theme');
       newTask.querySelector('.date').classList.add('dark-theme');
       newTask.querySelector('.description').classList.add('dark-theme');
@@ -171,10 +177,10 @@ btnmodal.addEventListener("click", function (e) {
   document.getElementById('descrimodal').value = '';
   document.getElementById('datemodal').value = '';
   modal.style.display = 'none';
-  
+
   // Mise à jour des évènements
 
-  setupDragAndDrop(); 
+  setupDragAndDrop();
   saveTasksToLocalStorage();
 });
 
@@ -185,8 +191,8 @@ let taskElements;
 
 function setupDragAndDrop() {
   taskElements = document.querySelectorAll('.task');
-  taskElements.forEach(function(taskElement) {
-    taskElement.addEventListener('dragstart', function(event) {
+  taskElements.forEach(function (taskElement) {
+    taskElement.addEventListener('dragstart', function (event) {
       event.dataTransfer.setData('text', taskElement.id);
     });
   });
@@ -195,21 +201,21 @@ function setupDragAndDrop() {
 // Distribution des zones de dragover et de drop pour la fonction de drag and drop
 
 const zoneTask = document.querySelector('#todoTask');
-zoneTask.addEventListener('dragover', function(event) {
+zoneTask.addEventListener('dragover', function (event) {
   event.preventDefault();
 });
 
 const zoneDoing = document.querySelector('#DoingTask');
-zoneDoing.addEventListener('dragover', function(event) {
-  event.preventDefault(); 
-});
-
-const zoneDone = document.querySelector('#DoneTask');
-zoneDone.addEventListener('dragover', function(event) {
+zoneDoing.addEventListener('dragover', function (event) {
   event.preventDefault();
 });
 
-zoneTask.addEventListener('drop', function(event) {
+const zoneDone = document.querySelector('#DoneTask');
+zoneDone.addEventListener('dragover', function (event) {
+  event.preventDefault();
+});
+
+zoneTask.addEventListener('drop', function (event) {
   event.preventDefault();
   const data = event.dataTransfer.getData("text");
   if (event.target.id === 'todoTask') {
@@ -218,7 +224,7 @@ zoneTask.addEventListener('drop', function(event) {
   saveTasksToLocalStorage();
 });
 
-zoneDoing.addEventListener('drop', function(event) {
+zoneDoing.addEventListener('drop', function (event) {
   event.preventDefault();
   const data = event.dataTransfer.getData("text");
   if (event.target.id === 'DoingTask') {
@@ -227,33 +233,47 @@ zoneDoing.addEventListener('drop', function(event) {
   saveTasksToLocalStorage();
 });
 
-zoneDone.addEventListener('drop', function(event) {
+zoneDone.addEventListener('drop', function (event) {
   event.preventDefault();
   const data = event.dataTransfer.getData("text");
   if (event.target.id === 'DoneTask') {
     event.target.appendChild(document.getElementById(data));
   }
-  saveTasksToLocalStorage(); 
+  saveTasksToLocalStorage();
 });
 
-// Fonction pour chercher une tâche dans la searchbar
+// Récupérer la barre de recherche
+const searchbar = document.querySelector('#searchbar');
 
-const searchbar = document.getElementById('searchbar');
-const tasks = document.querySelectorAll('.task');
+// Tableau pour stocker les tâches 
+let tasks = [];
 
-searchbar.addEventListener('input', function(event) {
+// Fonction pour la recherche
+searchbar.addEventListener('input', function (event) {
+
   const searchText = event.target.value.toLowerCase();
+  tasks = Array.from(document.querySelectorAll('.task'));
+  tasks.forEach(function (task) {
 
-  tasks.forEach(function(task) {
-    const taskName = task.querySelector('.nomDeTâche').textContent.toLowerCase();
-    const taskDescription = task.querySelector('.description').textContent.toLowerCase();
+    // Récupérer le nom et la description
+    const taskNameElement = task.querySelector('.nomDeTâche');
+    const taskDescriptionElement = task.querySelector('.description');
+    const taskName = taskNameElement?.textContent?.toLowerCase();
+    const taskDescription = taskDescriptionElement?.textContent?.toLowerCase();
 
-    if (taskName.includes(searchText) || taskDescription.includes(searchText)) {
-      task.style.display = 'block';
+    // Comparer avec la recherche
+    if (taskName && taskName.includes(searchText) ||
+      taskDescription && taskDescription.includes(searchText)) {
+      task.style.display = 'flex';
     } else {
-      task.style.display = 'none'; 
+      task.style.display = 'none';
     }
   });
+
+  // Si rien ne correspond, tout afficher
+  if (tasks.every(t => t.style.display === 'none')) {
+    tasks.forEach(t => t.style.display = 'flex');
+  }
 });
 
 // Fonction pour sauvegarder les tâches dans le localStorage
@@ -283,7 +303,7 @@ function loadTasksFromLocalStorage() {
     newTask.querySelector('.nomDeTâche').textContent = task.name;
     newTask.querySelector('.description').textContent = task.description;
     newTask.querySelector('.date').textContent = task.date;
-    if (document.body.classList.contains('dark-theme')){
+    if (document.body.classList.contains('dark-theme')) {
       newTask.querySelector('.nomDeTâche').classList.add('dark-theme');
       newTask.querySelector('.date').classList.add('dark-theme');
       newTask.querySelector('.description').classList.add('dark-theme');

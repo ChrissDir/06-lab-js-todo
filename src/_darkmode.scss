@@ -56,3 +56,7 @@ button.dark-theme{
 #modal-container.dark-theme{
     background-color: $to-do-darkmod-color;
 }
+
+#darkmodbtnimg:hover.dark-theme {
+    border: .125rem solid $primary-color;
+}
