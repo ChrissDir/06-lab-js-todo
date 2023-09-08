@@ -8,6 +8,8 @@ const deleteAllButton = document.querySelector("#deleteAll");
 let parentElementId;
 let editingTaskElement = null;
 
+// Toggle permettant d'activer ou non le Dark-Mode en cliquant sur l'image et en appliquant la classe dark-theme à tous les éléments de la page
+
 toggleModeButton.addEventListener('click', toggleDarkMode);
 
 function toggleDarkMode() {
@@ -20,10 +22,26 @@ function toggleDarkMode() {
   newTaskElements.forEach(function (element) {
     element.classList.toggle("dark-theme");
   });
+
+  // Ajout de l'état du dark mode dans le localStorage
+
+  if (document.body.classList.contains('dark-theme')) {
+    localStorage.setItem('dark-theme', 'true');
+  } else {
+    localStorage.setItem('dark-theme', 'false');
+  }
 }
 
+// Fonction permettant de faire en sorte que la première fois ou l'on visite le site, le dark-theme s'active tout seul ou non en fonction du theme de l'utilisateur et par la suite se rappeler du choix de l'utilisateur au niveau du dark-theme
+
 function addDarkModeByDefault() {
-  if (prefersDarkScheme.matches) {
+
+  // Vérifier la valeur du localStorage
+  const isDarkTheme = localStorage.getItem('dark-theme');
+
+  // Activer le thème sombre uniquement si isDarkTheme = 'true' 
+  if (isDarkTheme === 'true') {
+
     const elements = document.querySelectorAll("*");
     elements.forEach(function (element) {
       element.classList.add("dark-theme");
@@ -37,17 +55,24 @@ function addDarkModeByDefault() {
 }
 addDarkModeByDefault();
 
+// Bouton permettant de fermer le modal
+
 btnfermer.addEventListener('click', function (e) {
   e.preventDefault();
   modal.style.display = 'none';
 });
+
+// Sélectionne chaque tâche présente dans "DoneTask" et les suppriment
 
 deleteAllButton.addEventListener("click", function () {
   const doneTaskDivs = document.querySelectorAll("#DoneTask .task");
   doneTaskDivs.forEach(function (taskDiv) {
     taskDiv.remove();
   });
+  saveTasksToLocalStorage();
 });
+
+// Lorsque le bouton avec l'image de checkmark est cliqué, envoie la tâche vers la div "DoneTask" en supprimant ce bouton checkmark
 
 document.addEventListener('click', function (event) {
   if (event.target.classList.contains('checkmark')) {
@@ -57,15 +82,21 @@ document.addEventListener('click', function (event) {
       doneTaskDiv.appendChild(taskElement);
       const checkmarkButton = taskElement.querySelector('.checkmark');
       checkmarkButton.remove();
+      saveTasksToLocalStorage();
     }
   }
+
+  // Lors du clique sur l'image de la corbeille, sélectionne la div task la plus proche et la supprime avec tous ses éléments
 
   if (event.target.classList.contains('can')) {
     const taskElement = event.target.closest('.task');
     if (taskElement && taskElement instanceof Node) {
       taskElement.remove();
     }
+    saveTasksToLocalStorage();
   }
+
+  // Lorsque l'on clique sur le bouton modifier, récupération des données de la tâche puis modification + change le textContent du bouton du modal en "Modify"
 
   if (event.target.classList.contains('pen')) {
     const taskElement = event.target.closest('.task');
@@ -87,23 +118,19 @@ document.addEventListener('click', function (event) {
   }
 });
 
+// Fonction permettant de situer quel bouton a été cliqué pour situer ou la tâche va se créer et d'ouvrir le modal en changeant le textContent du btnmodal en "Add a task"
+
 const addTaskButtons = document.querySelectorAll('.addTask');
 addTaskButtons.forEach(function (button) {
   button.addEventListener('click', function (event) {
     parentElementId = event.target.parentNode.id;
     modal.style.display = 'flex';
-
-    if (parentElementId === 'DoneTask') {
-      const checkmarkButtons = document.querySelectorAll('#DoneTask .checkmark');
-      checkmarkButtons.forEach(function (button) {
-        button.style.display = 'none';
-      });
-    } else {
       const btnModal = document.getElementById('btnmodal');
       btnModal.textContent = 'Add a task';
-    }
   });
 });
+
+// Evènement se passant lors du click sur le bouton du modal
 
 btnmodal.addEventListener("click", function (e) {
   e.preventDefault();
@@ -111,17 +138,26 @@ btnmodal.addEventListener("click", function (e) {
   const description = document.getElementById('descrimodal').value;
   const date = document.getElementById('datemodal').value;
 
+  // Modifier le contenu d'une tâche si le bouton modifier a été cliqué
+
   if (editingTaskElement) {
     editingTaskElement.querySelector('.nomDeTâche').textContent = nameTask;
     editingTaskElement.querySelector('.description').textContent = description;
     editingTaskElement.querySelector('.date').textContent = date;
     editingTaskElement = null;
+    saveTasksToLocalStorage();
   } else {
+
+  // Créer une nouvelle tâche à partir du template
+
     const template = document.querySelector('.newTaskTemplate');
     const newTask = template.content.cloneNode(true);
     newTask.querySelector('.nomDeTâche').textContent = nameTask;
     newTask.querySelector('.date').textContent = date;
     newTask.querySelector('.description').textContent = description;
+
+  // Lui ajouter une classe dark-theme à ses éléments si le body contient cette classe
+
     if (document.body.classList.contains('dark-theme')){
       newTask.querySelector('.nomDeTâche').classList.add('dark-theme');
       newTask.querySelector('.date').classList.add('dark-theme');
@@ -130,7 +166,6 @@ btnmodal.addEventListener("click", function (e) {
     const parentElement = document.getElementById(parentElementId);
     newTask.querySelector('.task').setAttribute('id', 'task' + Date.now());
     parentElement.appendChild(newTask);
-    taskElements = document.querySelectorAll('.task');
   }
   document.getElementById('nameTask').value = '';
   document.getElementById('descrimodal').value = '';
@@ -138,56 +173,67 @@ btnmodal.addEventListener("click", function (e) {
   modal.style.display = 'none';
   
   // Mise à jour des évènements
-  setupDragAndDrop();
+
+  setupDragAndDrop(); 
+  saveTasksToLocalStorage();
 });
 
-let taskElements = document.querySelectorAll('.task');
+// Correction pour que le drag and drop fonctionne après rechargement
+let taskElements;
+
+// Fonction sélectionnant toute les tâches et leurs appliquant un dragstart permettant de récupérer les données de la tâche qui va se faire drag en se basant sur son id
 
 function setupDragAndDrop() {
-  taskElements.forEach(function (taskElement) {
-    taskElement.addEventListener('dragstart', function (event) {
+  taskElements = document.querySelectorAll('.task');
+  taskElements.forEach(function(taskElement) {
+    taskElement.addEventListener('dragstart', function(event) {
       event.dataTransfer.setData('text', taskElement.id);
     });
   });
 }
 
+// Distribution des zones de dragover et de drop pour la fonction de drag and drop
+
 const zoneTask = document.querySelector('#todoTask');
-zoneTask.addEventListener('dragover', function (event) {
+zoneTask.addEventListener('dragover', function(event) {
   event.preventDefault();
 });
 
 const zoneDoing = document.querySelector('#DoingTask');
-zoneDoing.addEventListener('dragover', function (event) {
-  event.preventDefault();
+zoneDoing.addEventListener('dragover', function(event) {
+  event.preventDefault(); 
 });
 
 const zoneDone = document.querySelector('#DoneTask');
-zoneDone.addEventListener('dragover', function (event) {
+zoneDone.addEventListener('dragover', function(event) {
   event.preventDefault();
 });
 
-zoneTask.addEventListener('drop', function (event) {
+zoneTask.addEventListener('drop', function(event) {
   event.preventDefault();
   const data = event.dataTransfer.getData("text");
   if (event.target.id === 'todoTask') {
     event.target.appendChild(document.getElementById(data));
   }
+  saveTasksToLocalStorage();
 });
 
-zoneDoing.addEventListener('drop', function (event) {
+zoneDoing.addEventListener('drop', function(event) {
   event.preventDefault();
   const data = event.dataTransfer.getData("text");
   if (event.target.id === 'DoingTask') {
     event.target.appendChild(document.getElementById(data));
   }
+  saveTasksToLocalStorage();
 });
 
-zoneDone.addEventListener('drop', function (event) {
+zoneDone.addEventListener('drop', function(event) {
   event.preventDefault();
   const data = event.dataTransfer.getData("text");
   if (event.target.id === 'DoneTask') {
     event.target.appendChild(document.getElementById(data));
   }
+  saveTasksToLocalStorage(); 
 });
 
 // Fonction pour chercher une tâche dans la searchbar
@@ -205,51 +251,50 @@ searchbar.addEventListener('input', function(event) {
     if (taskName.includes(searchText) || taskDescription.includes(searchText)) {
       task.style.display = 'block';
     } else {
-      task.style.display = 'none';
+      task.style.display = 'none'; 
     }
   });
 });
 
-// Fonction pour le local storage
+// Fonction pour sauvegarder les tâches dans le localStorage
 
-// Pour sauvegarder les données dans le localStorage
-function saveDataToLocalStorage() {
-  const tasks = document.querySelectorAll('.task');
-  const taskData = [];
-
-  tasks.forEach(function(task) {
-    const name = task.querySelector('.nomDeTâche').textContent;
-    const description = task.querySelector('.description').textContent;
-    const date = task.querySelector('.date').textContent;
-
-    taskData.push({ name, description, date });
+function saveTasksToLocalStorage() {
+  const taskElements = document.querySelectorAll('.task');
+  const tasks = Array.from(taskElements).map((taskElement) => {
+    return {
+      id: taskElement.id,
+      name: taskElement.querySelector('.nomDeTâche').textContent,
+      description: taskElement.querySelector('.description').textContent,
+      date: taskElement.querySelector('.date').textContent,
+      parent: taskElement.parentElement.id,
+    };
   });
-
-  localStorage.setItem('tasks', JSON.stringify(taskData));
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-// Pour charger les données depuis le localStorage
-function loadDataFromLocalStorage() {
-  const storedData = localStorage.getItem('tasks');
+// Fonction pour charger les tâches depuis le localStorage
 
-  if (storedData) {
-    const taskData = JSON.parse(storedData);
-
-    taskData.forEach(function(data) {
-      const template = document.querySelector('.newTaskTemplate');
-      const newTask = template.content.cloneNode(true);
-      newTask.querySelector('.nomDeTâche').textContent = data.name;
-      newTask.querySelector('.date').textContent = data.date;
-      newTask.querySelector('.description').textContent = data.description;
-
-      const parentElement = document.getElementById('todoTask');
-      parentElement.appendChild(newTask);
-    });
-
-    taskElements = document.querySelectorAll('.task');
-  }
+function loadTasksFromLocalStorage() {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  tasks.forEach((task) => {
+    const template = document.querySelector('.newTaskTemplate');
+    const newTask = template.content.cloneNode(true);
+    newTask.querySelector('.task').id = task.id;
+    newTask.querySelector('.nomDeTâche').textContent = task.name;
+    newTask.querySelector('.description').textContent = task.description;
+    newTask.querySelector('.date').textContent = task.date;
+    if (document.body.classList.contains('dark-theme')){
+      newTask.querySelector('.nomDeTâche').classList.add('dark-theme');
+      newTask.querySelector('.date').classList.add('dark-theme');
+      newTask.querySelector('.description').classList.add('dark-theme');
+    };
+    const parentElement = document.getElementById(task.parent);
+    parentElement.appendChild(newTask);
+  });
 }
 
-// Appeler les fonctions pour sauvegarder et charger les données
-saveDataToLocalStorage();
-loadDataFromLocalStorage();
+// Charger les tâches au chargement de la page
+loadTasksFromLocalStorage();
+
+// Réinitialiser les événements de drag and drop
+setupDragAndDrop();
