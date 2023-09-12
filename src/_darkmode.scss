@@ -1,62 +1,57 @@
-body.dark-theme {
-    color: $primary-color;
-}
-
-#container.dark-theme {
-    background-color: $darkmode-background-color;
-}
-
-#searchbar.dark-theme {
-    border: .1875rem solid $darkmode-background-color;
-    background-color: $darkmode-inputs;
-    color: $primary-color;
-}
-
-#loupe.dark-theme{
-    content: url(./assets/images/mg-darkmod.svg);
-}
-
-#searchbar.dark-theme::placeholder {
-    color: $placeholder-darkmod-color;
-}
-
-#searchbar.dark-theme:focus {
-    border: .1875rem solid $primary-color;
-}
-
-button.dark-theme{
-    border-color: $primary-color !important;
-    color: $primary-color;
-}
-
-#todoTask.dark-theme{
-    background-color: $to-do-darkmod-color;
-}
-
-#DoingTask.dark-theme{
-    background-color: $doing-darkmod-color;
-}
-
-#DoneTask.dark-theme{
-    background-color: $done-darkmod-color;
-}
-
-.nomDeTâche.dark-theme{
-    color: $secondary-color;
-}
-
-.date.dark-theme{
-    color: $secondary-color;
-}
-
-.description.dark-theme{
-    color: $secondary-color;
-}
-
-#modal-container.dark-theme{
-    background-color: $to-do-darkmod-color;
-}
-
-#darkmodbtnimg:hover.dark-theme {
-    border: .125rem solid $primary-color;
-}
+.dark-theme {
+    body {
+      color: $primary-color;
+    }
+  
+    #container {
+      background-color: $darkmode-background-color;
+    }
+  
+    #searchbar {
+      border: .1875rem solid $darkmode-background-color;
+      background-color: $darkmode-inputs;
+      color: $primary-color;
+  
+      &::placeholder {
+        color: $placeholder-darkmod-color;
+      }
+  
+      &:focus {
+        border: .1875rem solid $primary-color;
+      }
+    }
+  
+    #loupe {
+      content: url(./assets/images/mg-darkmod.svg);
+    }
+  
+    button {
+      border-color: $primary-color !important;
+      color: $primary-color;
+    }
+  
+    #todoTask {
+      background-color: $to-do-darkmod-color;
+    }
+  
+    #DoingTask {
+      background-color: $doing-darkmod-color;
+    }
+  
+    #DoneTask {
+      background-color: $done-darkmod-color;
+    }
+  
+    .nomDeTâche, .date, .description {
+      color: $secondary-color;
+    }
+  
+    #modal-container {
+      background-color: $to-do-darkmod-color;
+    }
+  
+    #darkmodbtnimg:hover {
+      border-radius: 2.8125rem;
+      border: .125rem solid $primary-color;
+    }
+  }

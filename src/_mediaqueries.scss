@@ -1,128 +1,147 @@
-@media screen and (max-width: 1038px){
-    #container{
-      padding: 1.625rem 2.25rem;
-    }
-    #modal-container{
-      width: 90%;
-    }
+@media screen and (max-width: 1038px) {
+  #container {
+    padding: 1.625rem 2.25rem;
   }
-  
-  @media screen and (max-width: 929px){
-    h1{
-      font-size: 3rem;
-    }
-    #todoTask, #DoingTask{
-      margin-bottom: 1.875rem;
-    }
-    #todoTask, #DoingTask, #DoneTask{
-      width: 100%;
-    }
-    #app{
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    #modal{
-      width: 100%;
-    }
-    #datemodal{
-      width: auto;
-    }
-    .date{
-      max-width: 30%;
-    }
 
-    #donePlacement{
-      padding-left: calc(45%);
-    }
-
-    .actions{
-      width: 20%;
-    }
+  #modal-container {
+    width: 90%;
   }
-  
-  @media screen and (max-width: 557px){
+}
 
-    #darkmodbtnimg{
-      width: 50px;
-      height: 50px;
-    }
-    #grid > button:nth-child(2){
-      margin-left: calc(100% - 3.75rem);
-    }
-    #searchbar{
-      padding: .5625rem 1.5rem;
+@media screen and (max-width: 929px) {
+  header h1 {
+    font-size: 48px;
+  }
+
+  #todoTask, #DoingTask {
+    margin-bottom: 1.875rem;
+    width: 100%;
+  }
+
+  #DoneTask {
+    width: 100%;
+  }
+
+  #app {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  #modal {
+    width: 100%;
+  }
+
+  #datemodal, .date {
+    width: auto;
+  }
+
+  .date {
+    max-width: 30%;
+  }
+
+  #donePlacement {
+    padding-left: calc(45%);
+  }
+
+  .actions {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 557px) {
+  #darkmodbtnimg {
+    width: 40px;
+    height: 40px;
+  }
+
+  h2{
+    margin-bottom: 0.5rem;
+  }
+
+  .addTask{
+    margin-bottom: 5px;
+  }
+
+  #grid > button:nth-child(2) {
+    margin-left: calc(100% - 3.75rem);
+  }
+
+  #searchbar {
+    padding: .5625rem 1.5rem;
+    font-size: .875rem;
+
+    &::placeholder {
       font-size: .875rem;
     }
-    #loupe{
-      width: 18px;
-      height: 18px; 
-    }
-    #searchbar::placeholder{
-      font-size: .875rem;
-    }
-  
-    #descrimodal, #nameTask{
-      padding: .625rem 15px;
-      font-size: .75rem;
-    }
-    
-    #datemodal{
-      padding: .625rem 15px;
-      font-size: .75rem;
-    }
-  
-    #btnmodal{
-      padding: .0625rem .4375rem;
-      font-size: .75rem;
-      border: .125rem solid $secondary-color;
-      border-radius: 1.875rem;
-    }
-  
-    #btnfermer{
-      font-size: 20px;
-    }
+  }
 
-    #todoTask,
-    #DoingTask,
-    #DoneTask{
-      min-height: 104px;
-    }
+  #descrimodal, #nameTask, #datemodal {
+    padding: .625rem 15px;
+    font-size: .75rem;
   }
-  
-  @media screen and (max-width: 513px){
-    h1{
-      display: flex;
-      align-items: center;
-      font-size: 1.875rem;
-    }
-    h2{
-      font-size: 20px;
-      margin-bottom: 1.25rem;
-    }
-    .addTask{
-      font-size: 16px;
-    }
-    #donePlacement{
-      padding-left: calc(45% - 15px);
-    }
-    .nomDeTâche, .date, .description {
-      font-size: .75rem;
-    }
-    #deleteAll{
-      width: 20px;
-      height: 20px;
-    }
-    #darkmodbtnimg{
-      width: 40px;
-      height: 40px;
-    }
-    .task{
-      min-height: 80px;
-      margin-bottom: 1.25rem;
-    }
-    .checkmark, .pen, .can{
-      width: 16px;
-      height: 20px;
-    }
+
+  #btnmodal {
+    padding: .0625rem .9375rem !important;
+    font-size: .75rem;
+    border: .125rem solid $secondary-color;
+    border-radius: 1.875rem;
   }
+
+  #btnfermer {
+    font-size: 20px;
+  }
+
+  #todoTask, #DoingTask, #DoneTask {
+    min-height: 70px;
+  }
+
+  #loupe{
+    width: 20px;
+    height: 20px;
+  }
+
+  header h1{
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 513px) {
+  h1 {
+    display: flex;
+    align-items: center;
+    font-size: 1.875rem;
+  }
+
+  h2, .addTask, .nomDeTâche, .date, .description {
+    font-size: .75rem;
+  }
+
+  h2 {
+    margin-bottom: 1.25rem;
+  }
+
+  #donePlacement {
+    padding-left: calc(45% - 15px);
+  }
+
+  #deleteAll, .checkmark, .pen, .can {
+    width: 16px;
+    height: 20px;
+  }
+
+  #darkmodbtnimg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .task {
+    min-height: 80px;
+    margin-bottom: 1.25rem;
+  }
+
+  .actions{
+    max-width: 65px !important;
+  }
+}
+

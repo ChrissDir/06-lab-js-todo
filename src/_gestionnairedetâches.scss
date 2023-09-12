@@ -1,6 +1,4 @@
-#todoTask,
-#DoingTask,
-#DoneTask {
+#todoTask, #DoingTask, #DoneTask {
   width: 30%;
   min-width: 285px;
   height: fit-content;
@@ -26,7 +24,7 @@
   background-color: $done-color;
 }
 
-#donePlacement{
+#donePlacement {
   display: flex;
   justify-content: space-between;
   padding-left: calc(45% - 15px);
@@ -38,16 +36,17 @@
   width: 100%;
   min-height: 111px;
   height: auto;
-  margin-bottom: 2.75rem;
+  margin-top: 22px;
+  margin-bottom: 22px;
   background-color: $primary-color;
-}
 
-.task:hover{
-  cursor: grab;
-}
+  &:hover {
+    cursor: grab;
+  }
 
-.task:active{
-  cursor: grabbing;
+  &:active {
+    cursor: grabbing;
+  }
 }
 
 .addTask {
@@ -56,11 +55,11 @@
   margin-bottom: 15px;
   text-transform: uppercase;
   font-size: 1.25rem;
-}
 
-.addTask:hover{
-  color: $hover-color;
-  transition: 0.3s ease-in-out;
+  &:hover {
+    color: $hover-color;
+    transition: 0.3s ease-in-out;
+  }
 }
 
 .contenu {
@@ -69,121 +68,114 @@
   justify-content: space-between;
   width: 100%;
   padding: .3125rem;
+
+  .nomDeTâche, .date {
+    display: flex;
+    align-items: center;
+    word-break: break-word;
+    width: auto;
+    height: auto;
+    border-bottom: .0625rem solid $secondary-color;
+    padding-bottom: 1%;
+  }
+
+  .nomDeTâche {
+    max-width: 55%;
+  }
+
+  .date {
+    width: fit-content;
+    max-width: 40%;
+  }
+
+  .haut, .bas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .haut {
+    margin-bottom: 2%;
+  }
+
+  .description {
+    display: flex;
+    word-break: break-word;
+    width: auto;
+    max-width: 55%;
+    height: auto;
+  }
+
+  .actions {
+    display: flex;
+    align-items: end;
+    margin-right: .3125rem;
+    justify-content: space-between;
+    max-width: 90px;
+    width: 35%;
+  }
 }
 
-.nomDeTâche, .date{
-  display: flex;
-  align-items: center;
-  word-break: break-word;
-  width: auto;
-  height: auto;
-  border-bottom: .0625rem solid $secondary-color;
-  padding-bottom: 1%;
-}
-
-.nomDeTâche{
-  max-width: 55%;
-}
-
-.date{
-  width: fit-content;
-  max-width: 40%;
-}
-
-.haut{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-bottom: 2%;
-}
-
-.bas{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.description{
-  display: flex;
-  word-break: break-word;
-  width: auto;
-  max-width: 55%;
-  height: auto;
-}
-
-.actions {
-  display: flex;
-  align-items: end;
-  margin-right: .3125rem;
-  justify-content: space-between;
-  max-width: 80px;
-  width: 35%;
-}
-
-#modal{
+#modal {
   position: absolute;
+  display: none;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-  display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0 , 0.8);
+
+  &-container {
+    background-color: $to-do-color;
+    padding: .625rem 2.1875rem 2.1875rem 2.1875rem;
+    width: 50%;
+  }
+
+  .inputmodal {
+    display: flex;
+    margin-bottom: 1.5625rem;
+    justify-content: space-between;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    #descrimodal, #nameTask {
+      width: 100%;
+      padding: 1.1875rem 1.625rem;
+      font-size: 1.25rem;
+      outline: none;
+    }
+
+    #datemodal {
+      width: auto;
+      padding: 1.1875rem 1.625rem;
+      font-size: 1.25rem;
+      outline: none;
+    }
+  }
+
+  #formmodal {
+    padding: 0;
+  }
+
+  #btnmodal {
+    padding: 1px 3rem;
+    font-size: 1.25rem;
+    border: .125rem solid $secondary-color;
+    border-radius: 1.875rem;
+  }
 }
 
-#fermer{
+#fermer {
   display: flex;
   justify-content: right;
-}
 
-#btnfermer{
-  font-size: 1.875rem;
-  margin-bottom: 5%;
-  color: $primary-color;
-}
-
-#modal{
-  display: none;
-}
-
-#modal-container{
-  background-color: $to-do-color;
-  padding: .625rem 2.1875rem 2.1875rem 2.1875rem;
-  width: 50%;
-}
-
-.inputmodal{
-  display: flex;
-  margin-bottom: 1.5625rem;
-  justify-content: space-between;
-}
-
-.inputmodal:last-child{
-  margin-bottom: 0;
-}
-
-#descrimodal, #nameTask{
-  width: 100%;
-  padding: 1.1875rem 1.625rem;
-  font-size: 1.25rem;
-  outline: none;
-}
-
-#datemodal{
-  width: auto;
-  padding: 1.1875rem 1.625rem;
-  font-size: 1.25rem;
-  outline: none;
-}
-
-#formmodal{
-  padding: 0;
-}
-
-#btnmodal{
-  padding: 1px 3rem;
-  font-size: 1.25rem;
-  border: .125rem solid $secondary-color;
-  border-radius: 1.875rem;
+  #btnfermer {
+    font-size: 1.875rem;
+    margin-bottom: 5%;
+    color: $primary-color;
+  }
 }
